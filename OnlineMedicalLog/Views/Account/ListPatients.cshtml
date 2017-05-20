@@ -1,0 +1,42 @@
+﻿@model IEnumerable<OnlineMedicalLog.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Patients";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("ListPatients", "Account", FormMethod.Get))
+{
+    <p>
+        Patient name: @Html.TextBox("patientName", "", new { style = "margin-right: 20px;" })
+        Email: @Html.TextBox("email", "", new { style = "margin-right: 20px;" })
+        <input type="submit" value="Filter" class="btn btn-default" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            User name
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.ActionLink("View test results", "Index", "TestResult", new { patientId = item.Id }, null)
+        </td>
+    </tr>
+}
+</table>

@@ -1,0 +1,48 @@
+﻿@model OnlineMedicalLog.Models.ApplicationUser
+
+@{
+    ViewBag.Title = ViewBag.grant ? "Grant application" : "Reject application";
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>Are you sure you want to @(ViewBag.grant ? "grant" : "reject") this application?</h4>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            User name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            Role
+        </dt>
+
+        <dd>
+            @ViewBag.userRoleName
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm("ManageApplicationConfirmed", "Account", new { userId = Model.Id, grant = ViewBag.grant }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=@(ViewBag.grant ? "Grant" : "Reject") class="btn btn-default" /> |
+            @Html.ActionLink("Back to applications", "ListApplications", "Account")
+        </div>
+    }
+</div>

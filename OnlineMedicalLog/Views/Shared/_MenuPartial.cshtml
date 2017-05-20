@@ -1,0 +1,7 @@
+﻿@if (Request.IsAuthenticated && "admin" == ViewBag.role)
+{
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Manage applications", "ListApplications", "Account")</li>
+        <li>@Html.ActionLink("Manage locks", "ListLocks", "Account")</li>
+    </ul>
+}
